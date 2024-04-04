@@ -19,7 +19,18 @@ try {
         
 }
 export const getNote = async (req, res) => {
+
+  
 try {
+    if(!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+        return res.status(404).json({
+            success: false,
+            error: "invalid note id",
+        })
+    }
+
+    // check if vaild mongo id
+
     const note = await Note.findById(req.params.id);
     if (!note) {
         return res.status(404).json({
