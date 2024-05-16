@@ -2,8 +2,9 @@
 import Note from "../models/Note.js";
 
 export const getNotes = async (req, res) => {
+    const userId = req.userId
 try {
-    const notes = await Note.find();
+    const notes = await Note.find({userId});
     res.status(200).json(
         {
             success: true,
@@ -52,8 +53,9 @@ try {
 };
 
 export const addNote = async (req, res) => {
+    const userId = req.userId;
 try {
-    const note = await Note.create(req.body);
+    const note = await Note.create({...req.body, userId});
     res.status(201).json({
         success: true,
         data: note, 
