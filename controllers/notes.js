@@ -97,19 +97,18 @@ export const updateNote = async(req, res) => {
 export const deleteNote = async (req, res) => {
 
 try {
-    const note = await Note.findById(req.params.id);
-    if (!note) {
-        return res.status(404).json({
+    const note = await Note.findByIdAndDelete(req.params.id);
+    if(!note) {
+        return res.status(400).json({
             success: false,
             error: "Note not found",
-        });
+        }); 
     }
-    await note.remove();   
     res.status(200).json({
         success: true,
         data: {},
-
     });
+
 } catch (error) {
 
     res.status(400).json({
