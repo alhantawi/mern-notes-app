@@ -93,7 +93,7 @@ export const updateNote = async(req, res) => {
     }
     
 }
-
+// delete note 
 export const deleteNote = async (req, res) => {
 
 try {
